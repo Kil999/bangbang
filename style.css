@@ -92,16 +92,19 @@ button:hover {
 }
 
 /* Mobile controls */
-#joystick-container {
+#joystick-container,
+#shootButton {
     position: absolute;
+    touch-action: none;
+}
+
+#joystick-container {
     bottom: 30px;
     left: 30px;
     width: 100px;
     height: 100px;
     background-color: rgba(0, 0, 0, 0.5);
     border-radius: 50%;
-    touch-action: none;
-    display: none;
 }
 
 #joystick {
@@ -109,14 +112,13 @@ button:hover {
     height: 60px;
     background-color: grey;
     border-radius: 50%;
-    position: absolute;
+    position: relative;
     left: 20px;
     top: 20px;
     touch-action: none;
 }
 
 #shootButton {
-    position: absolute;
     bottom: 30px;
     right: 30px;
     width: 80px;
@@ -128,6 +130,18 @@ button:hover {
     color: white;
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
     cursor: pointer;
-    touch-action: none;
-    display: none;
+}
+
+@media (min-width: 768px) {
+    #joystick-container,
+    #shootButton {
+        display: none;
+    }
+}
+
+@media (max-width: 767px) {
+    #joystick-container,
+    #shootButton {
+        display: block;
+    }
 }

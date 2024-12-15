@@ -159,8 +159,10 @@ function startGame() {
     canvas.style.display = 'block';
     healthBarContainer.style.display = 'flex';
     playerInfoContainer.style.display = 'flex';
-    joystickContainer.style.display = 'block';
-    document.getElementById('shootButton').style.display = 'block';
+    if (window.innerWidth < 768) {
+        joystickContainer.style.display = 'block';
+        document.getElementById('shootButton').style.display = 'block';
+    }
     gameStarted = true;
     resetGame();
 }
