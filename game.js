@@ -163,6 +163,46 @@ function startGame() {
     resetGame();
 }
 
+// Joystick controls
+joystickContainer.addEventListener('touchstart', (e) => {
+    joystickData.active = true;
+    joystickData.initialX = e.touches[0].clientX;
+    joystickData.initialY = e.touches[0].clientY;
+    joystickData.currentX = joystickData.initialX;
+    joystickData.currentY = joystickData.initialY;
+});
+
+joystickContainer.addEventListener('touchmove', (e) => {
+    if (joystickData.active) {
+        const touch = e.touches[0];
+        const deltaX = touch.clientX - joystickData.initialX;
+        const deltaY = touch.clientY - joystickData.initialY;
+
+        const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+        const maxDistance = joystickContainer.clientWidth / 2;
+
+        if (distance < maxDistance) {
+            joystick.style.transform = `translate(${deltaX}px, ${deltaY}px)`;
+        } else {
+            const angle = Math.atan2(deltaY, deltaX);
+            joystick.style.transform = `translate(${Math.cos(angle) * maxDistance}px, ${Math.sin(angle) * maxDistance}px)`;
+        }
+
+        const normalizedX = deltaX / maxDistance;
+        const normalizedY = deltaY / maxDistance;
+
+        player1.dx = normalizedX * player1.speed;
+        player1.dy = normalizedY * player1.speed;
+    }
+});
+
+joystickContainer.addEventListener('touchend', () => {
+    joystickData.active = false;
+    joystick.style.transform = `translate(0px, 0px)`;
+    player1.dx = 0;
+    player1.dy = 0;
+});
+
 // Keyboard controls
 document.addEventListener('keydown', (e) => {
     if (gameStarted) {
