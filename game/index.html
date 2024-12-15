@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2D PvP Game</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="health-bar-container hidden"> 
+        <div id="healthBar1" class="health-bar">Player 1 Health: 5</div> 
+        <div id="healthBar2" class="health-bar">Player 2 Health: 5</div>
+    </div>
+    <button id="startButton" onclick="startGame()">START</button>
+    <canvas id="gameCanvas" width="800" height="600" style="display: none;"></canvas>
+
+    <!-- Player info with HP bars -->
+    <div class="player-info-container">
+        <div class="player-info">
+            <div class="player-image blue-box"></div>
+            <div id="player1HealthBar" class="player-health-bar"></div>
+        </div>
+        <div class="player-info">
+            <div id="player2HealthBar" class="player-health-bar"></div>
+            <div class="player-image red-box"></div>
+        </div>
+    </div>
+
+    <!-- Mobile Controls -->
+    <div id="joystick-container">
+        <div id="joystick"></div>
+    </div>
+    <button id="shootButton" onclick="shootBullet(player1)">Shoot</button>
+
+    <script src="game.js"></script>
+</body>
+</html>
