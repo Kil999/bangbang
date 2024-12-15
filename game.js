@@ -7,6 +7,7 @@ const player1HealthBar = document.getElementById('player1HealthBar');
 const player2HealthBar = document.getElementById('player2HealthBar');
 const joystickContainer = document.getElementById('joystick-container');
 const joystick = document.getElementById('joystick');
+const playerInfoContainer = document.querySelector('.player-info-container');
 
 const player1 = { x: 50, y: 300, width: 20, height: 20, color: 'blue', speed: 5, bullets: [], health: 5, dx: 0, dy: 0 };
 const player2 = { x: 730, y: 300, width: 20, height: 20, color: 'red', speed: 5, bullets: [], health: 5, isBot: true };
@@ -89,7 +90,6 @@ function detectCollisions() {
     for (const bullet of player1.bullets) {
         if (bullet.x > player2.x && bullet.x < player2.x + player2.width &&
             bullet.y > player2.y && bullet.y < player2.y + player2.height) {
-            console.log('Player 1 hits Player 2!');
             player2.health--;
             player1.bullets.splice(player1.bullets.indexOf(bullet), 1);
             updateHealthBars();
@@ -102,7 +102,6 @@ function detectCollisions() {
     for (const bullet of player2.bullets) {
         if (bullet.x > player1.x && bullet.x < player1.x + player1.width &&
             bullet.y > player1.y && bullet.y < player1.y + player1.height) {
-            console.log('Player 2 hits Player 1!');
             player1.health--;
             player2.bullets.splice(player2.bullets.indexOf(bullet), 1);
             updateHealthBars();
@@ -158,7 +157,10 @@ function gameLoop() {
 function startGame() {
     document.getElementById('startButton').style.display = 'none';
     canvas.style.display = 'block';
-    healthBarContainer.classList.remove('hidden');
+    healthBarContainer.style.display = 'flex';
+    playerInfoContainer.style.display = 'flex';
+    joystickContainer.style.display = 'block';
+    document.getElementById('shootButton').style.display = 'block';
     gameStarted = true;
     resetGame();
 }
